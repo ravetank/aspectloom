@@ -6,7 +6,7 @@ __pycache__/
 *.py[cod]
 
 # Generated output and release archives
-ai-sized/
+aspectloom-output/
 _debug/
 _resnap_*.png
 _raw_*.png
@@ -17,3 +17,6 @@ dist/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Local brand memory used by writing assistants
+.claude/

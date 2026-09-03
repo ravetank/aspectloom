@@ -1,17 +1,17 @@
 [workspace]
-name              = "ai-sizing-normalizer"
+name              = "aspectloom"
 version           = "1.0.0"
-description       = "Aspect-aware image resolution normalization with AI outpainting through ComfyUI."
+description       = "Aspect-aware AI outpainting that weaves images into standard resolutions through ComfyUI."
 channels          = ["conda-forge"]
 platforms         = ["win-64", "linux-64", "osx-arm64"]
 
 [tasks]
-run               = "python resolution_snap.py"
-dry-run           = "python resolution_snap.py --dry-run"
-list-buckets      = "python resolution_snap.py --list-buckets"
-verbose           = "python resolution_snap.py --verbose"
+run               = "python aspectloom.py"
+dry-run           = "python aspectloom.py --dry-run"
+list-buckets      = "python aspectloom.py --list-buckets"
+verbose           = "python aspectloom.py --verbose"
 test              = "python -m unittest discover -s tests -v"
-check             = "python -m compileall -q resolution_snap.py tests"
+check             = "python -m compileall -q aspectloom.py resolution_snap.py tests"
 
 [dependencies]
 python            = ">=3.11"

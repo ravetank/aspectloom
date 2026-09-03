@@ -1,8 +1,10 @@
+import contextlib
+import io
 import unittest
 
 from PIL import Image
 
-import resolution_snap as app
+import aspectloom as app
 
 
 class BucketSelectionTests(unittest.TestCase):
@@ -84,7 +86,7 @@ class WorkflowTests(unittest.TestCase):
     def test_workflow_uses_selected_model_and_image(self):
         workflow = app.build_workflow(
             "uploaded.png",
-            "AI-Sizing-Normalizer/example",
+            "Aspectloom/example",
             model_name="custom-inpaint.safetensors",
         )
 
@@ -95,8 +97,17 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(workflow["8"]["inputs"]["image"], "uploaded.png")
         self.assertEqual(
             workflow["10"]["inputs"]["filename_prefix"],
-            "AI-Sizing-Normalizer/example",
+            "Aspectloom/example",
         )
+
+
+class DisplayTests(unittest.TestCase):
+    def test_bucket_table_is_ascii_safe(self):
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            app.print_bucket_table()
+
+        output.getvalue().encode("ascii")
 
 
 if __name__ == "__main__":
