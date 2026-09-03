@@ -1,0 +1,65 @@
+{
+  "2": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "inpaint\\SD15\\realisticVisionV60B1_v51HyperInpaintVAE.safetensors"
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["2", 1],
+      "text": "highly detailed background, seamless extension, photorealistic, landscape, ultra quality, matching lighting, masterpiece, 8k"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["2", 1],
+      "text": "blurry, cropped, out of frame, worst quality, low quality"
+    }
+  },
+  "8": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "example.png"
+    }
+  },
+  "9": {
+    "class_type": "VAEEncodeForInpaint",
+    "inputs": {
+      "pixels": ["8", 0],
+      "vae": ["2", 2],
+      "mask": ["8", 1],
+      "grow_mask_by": 8
+    }
+  },
+  "10": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["2", 0],
+      "positive": ["3", 0],
+      "negative": ["4", 0],
+      "latent_image": ["9", 0],
+      "seed": 1982,
+      "steps": 30,  // More steps for better quality
+      "cfg": 7.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1
+    }
+  },
+  "11": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["10", 0],
+      "vae": ["2", 2]
+    }
+  },
+  "12": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": ["11", 0]
+    }
+  }
+}

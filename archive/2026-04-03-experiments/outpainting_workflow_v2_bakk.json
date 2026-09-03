@@ -1,0 +1,153 @@
+{
+  "1": {
+    "inputs": {
+      "seed": 1982,
+      "steps": 6,
+      "cfg": 1,
+      "sampler_name": "dpmpp_2m_sde",
+      "scheduler": "sgm_uniform",
+      "denoise": 0.49,
+      "model": [
+        "16",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "6",
+        1
+      ],
+      "latent_image": [
+        "6",
+        2
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "2": {
+    "inputs": {
+      "ckpt_name": "inpaint\\SD15\\realisticVisionV60B1_v51HyperInpaintVAE.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "3": {
+    "inputs": {
+      "text": "highly detailed background, seamless extension, photorealistic, landscape, ultra quality, matching lighting, masterpiece, 8k",
+      "clip": [
+        "16",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text": "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime), text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, UnrealisticDream",
+      "clip": [
+        "16",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "6": {
+    "inputs": {
+      "noise_mask": true,
+      "positive": [
+        "3",
+        0
+      ],
+      "negative": [
+        "4",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ],
+      "pixels": [
+        "8",
+        0
+      ],
+      "mask": [
+        "8",
+        1
+      ]
+    },
+    "class_type": "InpaintModelConditioning",
+    "_meta": {
+      "title": "InpaintModelConditioning"
+    }
+  },
+  "7": {
+    "inputs": {
+      "samples": [
+        "1",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "8": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "10": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "16": {
+    "inputs": {
+      "lora_name": "SD15\\Hyper-SD15-1step-lora.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "2",
+        0
+      ],
+      "clip": [
+        "2",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA (Model and CLIP)"
+    }
+  }
+}

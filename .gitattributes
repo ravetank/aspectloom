@@ -1,0 +1,9 @@
+# Keep text files portable across Windows, macOS, and Linux.
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.json text eol=lf
+
+# SCM syntax highlighting and prevention of noisy lockfile merges.
+pixi.lock merge=binary linguist-language=YAML linguist-generated=true -diff
